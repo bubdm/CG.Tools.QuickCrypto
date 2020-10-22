@@ -1,0 +1,263 @@
+﻿<syncfusion:ChromelessWindow x:Class="QuickCrypto.Views.MainWindow"
+                             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                             xmlns:vm="clr-namespace:QuickCrypto.ViewModels"
+                             xmlns:inf="clr-namespace:QuickCrypto.Infrastructure"
+                             Title="Quick Crypto 1.2" 
+                             Height="550" 
+                             Width="475" 
+                             WindowStartupLocation="CenterScreen"
+                             ResizeMode="NoResize"
+                             ShowInTaskbar="True"
+                             UseNativeChrome="True"
+                             Icon="/Images/Gear.png"
+                             MouseDown="ChromelessWindow_MouseDown"
+                             xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF" 
+                             skin:SfSkinManager.VisualStyle="VisualStudio2015">
+    <Window.Resources>
+        <inf:ByteArrayConverter x:Key="ByteArrayConverter" />
+    </Window.Resources>
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="FileExitMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/Exit.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About ..." Click="HelpAboutMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/About.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <syncfusion:TabControlExt x:Name="tabControl"
+                                  Grid.Row="1"
+                                  TabPanelBackground="DarkKhaki"
+                                  CloseButtonType="Hide"
+                                  ShowTabListContextMenu="False" 
+                                  ShowTabItemContextMenu="False"
+                                  TabStripPlacement="Bottom">
+
+            <syncfusion:TabItemExt x:Name="dataPrivacyTab"
+                                   Header="DPAPI">
+
+                <Grid Margin="0, 0, 0, 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" 
+                            BorderBrush="Gray" 
+                            BorderThickness="0, 0, 0, 2"
+                            Margin="0, 0, 0, 2">
+                        <TextBlock  x:Name="dataPrivacyInstructions" 
+                                    TextWrapping="WrapWithOverflow"
+                                    TextAlignment="Justify"
+                                    Height="60"
+                                    Padding="5, 2, 2, 10"
+                                    Margin="5">
+                            DPAPI doesn't require a password, which makes it great for use in configuration files.
+                        </TextBlock>
+                    </Border>
+
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <syncfusion:ComboBoxAdv x:Name="dataProtectionScope"
+                                                ItemsSource="{Binding DataPrivacy.Scopes}"
+                                                SelectedItem="{Binding DataPrivacy.SelectedScope}"
+                                                DefaultText="Choose Items ..."
+                                                VerticalAlignment="Center"
+                                                Width="250"/>
+                        <Label x:Name="dataPrivacyEntropy" 
+                               FontSize="10"
+                               Content="{Binding DataPrivacy.Entropy, Converter={StaticResource ByteArrayConverter}}" 
+                               ContentStringFormat="(Entropy: {0})"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="Gray"
+                               Margin="5, 0, 0, 0"/>
+                    </StackPanel>
+
+                    <syncfusion:SfTextBoxExt x:Name="dataPrivayPlainText" 
+                                             Grid.Row="2"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding DataPrivacy.PlainText, Mode=TwoWay}"
+                                             TextChanged="dataPrivayPlainText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put plain text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>
+                    </syncfusion:SfTextBoxExt>
+
+                    <StackPanel Grid.Row="3" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <syncfusion:ButtonAdv x:Name="dataPrivayEncrypt" 
+                                              SmallIcon="/Images/Down Arrow - 02.png"
+                                              Label="Encrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Margin="0, 0, 5, 0"
+                                              Command="{Binding DataPrivacy.EncryptCommand}"/>
+                        <syncfusion:ButtonAdv x:Name="dataPrivayDecrypt" 
+                                              SmallIcon="/Images/Up Arrow - 02.png"
+                                              Label="Decrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Command="{Binding DataPrivacy.DecryptCommand}"/>
+                    </StackPanel>
+
+                    <syncfusion:SfTextBoxExt x:Name="dataPrivayEncryptedText" 
+                                             Grid.Row="4"
+                                             Watermark="Put encrypted text here" 
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding DataPrivacy.EncryptedText, Mode=TwoWay}"
+                                             TextChanged="dataPrivayEncryptedText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put encrypted text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>
+                    </syncfusion:SfTextBoxExt>
+
+                </Grid>
+
+            </syncfusion:TabItemExt >
+
+            <syncfusion:TabItemExt x:Name="cyptoTab"
+                     Header="Rijndael">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" 
+                            BorderBrush="Gray" 
+                            BorderThickness="0, 0, 0, 2"
+                            Margin="0, 0, 0, 2">
+                        <TextBlock  x:Name="rijndaelInstructions" 
+                                    Height="60"
+                                    TextAlignment="Justify"
+                                    TextWrapping="WrapWithOverflow"
+                                    Margin="5"
+                                    Padding="5, 2, 2, 10">
+                            Rijndael is a 256 bit cipher that requires a passkey and a SALT value. The SALT must be at least 8 bytes long for the cipher to work.
+                        </TextBlock>
+                    </Border>
+
+                    <Grid Grid.Row="1"
+                          HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" 
+                               Content="Passkey"/>
+                        <PasswordBox x:Name="rijndaelPassword"
+                                     Grid.Column="1"
+                                     PasswordChanged="rijndaelPassword_PasswordChanged" />
+                    </Grid>
+
+                    <Grid Grid.Row="2"
+                          HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" 
+                               Content="Salt" />
+                        <PasswordBox x:Name="rijndaelSalt"
+                                     Grid.Column="1"
+                                     PasswordChanged="rijndaelSalt_PasswordChanged" />
+
+                    </Grid>
+
+                    <syncfusion:SfTextBoxExt x:Name="rijndaelPlainText" 
+                                             Grid.Row="3"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding Rijndael.PlainText, Mode=TwoWay}"
+                                             TextChanged="rijndaelPlainText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put plain text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>
+                    </syncfusion:SfTextBoxExt>
+
+                    <StackPanel Grid.Row="4" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <syncfusion:ButtonAdv x:Name="rijndaelEncrypt" 
+                                              SmallIcon="/Images/Down Arrow - 02.png"
+                                              Label="Encrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Margin="0, 0, 5, 0"
+                                              Command="{Binding Rijndael.EncryptCommand}"/>
+                        <syncfusion:ButtonAdv x:Name="rijndaelDecrypt" 
+                                              SmallIcon="/Images/Up Arrow - 02.png"
+                                              Label="Decrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Command="{Binding Rijndael.DecryptCommand}"/>
+                    </StackPanel>
+
+                    <syncfusion:SfTextBoxExt x:Name="rijndaelEncryptedText" 
+                                             Grid.Row="5"
+                                             Watermark="Put encrypted text here" 
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding Rijndael.EncryptedText, Mode=TwoWay}"
+                                             TextChanged="rijndaelEncryptedText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put encrypted text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>                        
+                    </syncfusion:SfTextBoxExt>
+                </Grid>
+
+            </syncfusion:TabItemExt>
+
+        </syncfusion:TabControlExt>
+
+    </Grid>
+</syncfusion:ChromelessWindow>

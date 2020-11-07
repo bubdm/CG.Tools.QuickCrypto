@@ -282,9 +282,12 @@ namespace CG.Tools.QuickCrypto.Views
         private void HelpAboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
+                this,
                 $"QuickCrypto - [{typeof(MainWindowViewModel).Assembly.ReadFileVersion()}]" +
-                $"{Environment.NewLine}Copyright © 2018 - {DateTime.Today.Year} by CodeGator.",
-                "About",
+                $"{Environment.NewLine}Copyright © 2018 - {DateTime.Today.Year} " +
+                $"by CodeGator. All rights reserved.{Environment.NewLine}{Environment.NewLine}" +
+                $"Warning: This computer program is protected by copyright law and international treaties. Unauthorized reproduction or distribution of this program, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the full extent of the law.",
+                "About QuickCrypto",
                 MessageBoxButton.OK
                 );
         }

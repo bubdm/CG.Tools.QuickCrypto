@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace QuickCrypto.ViewModels
+namespace CG.Tools.QuickCrypto.ViewModels
 {
     /// <summary>
     /// This class represents a base view-model implementation.

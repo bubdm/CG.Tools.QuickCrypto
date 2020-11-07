@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace QuickCrypto
+namespace CG.Tools.QuickCrypto
 {
     /// <summary>
     /// This class represents the code-behind for the application.

@@ -1,11 +1,12 @@
-﻿using Syncfusion.Windows.Shared;
+﻿using CG.Tools.QuickCrypto.Views;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 
-namespace QuickCrypto.ViewModels
+namespace CG.Tools.QuickCrypto.ViewModels
 {
     /// <summary>
     /// This class represents a view-model for the data privacy tab.
@@ -18,12 +19,14 @@ namespace QuickCrypto.ViewModels
 
         #region Fields
 
-        private byte[] _entropy = new byte[] { 12, 48, 8, 20 };
+        private byte[] _entropy = new byte[] { 4, 8, 15, 16, 23, 42 }; // Don't tell Hugo!!
+        
         private IEnumerable<string> _scopes;
         private string _selectedScope;
         private string _plainText;
         private string _encryptedText;
 
+        private DelegateCommand _entropyCommand;
         private DelegateCommand _encryptCommand;
         private DelegateCommand _decryptCommand;
 
@@ -107,7 +110,16 @@ namespace QuickCrypto.ViewModels
         // *******************************************************************
 
         #region Commands
-        
+
+        /// <summary>
+        /// This property contains the entropy command.
+        /// </summary>
+        public DelegateCommand EntropyCommand =>
+            _entropyCommand ?? (_entropyCommand = new DelegateCommand(
+                ExecuteEntropyCommand,
+                CanExecuteEntropyCommand
+                ));
+
         /// <summary>
         /// This property contains the encryption command.
         /// </summary>
@@ -143,7 +155,7 @@ namespace QuickCrypto.ViewModels
         {
             // Setup default property values.
             Scopes = Enum.GetNames(typeof(DataProtectionScope));
-            SelectedScope = Enum.GetName(typeof(DataProtectionScope), DataProtectionScope.CurrentUser);
+            SelectedScope = Enum.GetName(typeof(DataProtectionScope), DataProtectionScope.LocalMachine);
         }
 
         #endregion
@@ -153,6 +165,42 @@ namespace QuickCrypto.ViewModels
         // *******************************************************************
 
         #region Private methods
+
+        /// <summary>
+        /// This method is called to edit the entropy.
+        /// </summary>
+        /// <param name="args">The arguments for the operation.</param>
+        void ExecuteEntropyCommand(object args)
+        {
+            // Create the popup window.
+            var dialog = new EntropyWindow();
+
+            // Configure the window & viewmodel.
+            dialog.Owner = Application.Current.MainWindow;
+            (dialog.DataContext as EntropyWindowViewModel).Entropy = Entropy;
+
+            // Did the user click ok?
+            if (true == dialog.ShowDialog())
+            {
+                // Update the entropy.
+                Entropy = (dialog.DataContext as EntropyWindowViewModel).Entropy;
+            }
+        }
+
+        // *******************************************************************
+
+        /// <summary>
+        /// This method indicates whether it should be possible to call the <see cref="ExecuteEntropyCommand(object)"/>
+        /// method.
+        /// </summary>
+        /// <param name="args">The arguments for the operation.</param>
+        /// <returns>True if the method should be called; false otherwise.</returns>
+        bool CanExecuteEntropyCommand(object args)
+        {
+            return true;
+        }
+
+        // *******************************************************************
 
         /// <summary>
         /// This method is called to perform an encryption operation.

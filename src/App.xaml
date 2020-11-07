@@ -1,7 +1,7 @@
-﻿<Application x:Class="QuickCrypto.App"
+﻿<Application x:Class="CG.Tools.QuickCrypto.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QuickCrypto"
+             xmlns:local="clr-namespace:CG.Tools.QuickCrypto"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
 

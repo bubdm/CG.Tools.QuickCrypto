@@ -1,11 +1,12 @@
-﻿using QuickCrypto.ViewModels;
+﻿using CG.Reflection;
+using CG.Tools.QuickCrypto.ViewModels;
 using Syncfusion.SfSkinManager;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace QuickCrypto.Views
+namespace CG.Tools.QuickCrypto.Views
 {
     /// <summary>
     /// This class represents the code-behind for the main window.
@@ -281,7 +282,8 @@ namespace QuickCrypto.Views
         private void HelpAboutMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                $"Quick Crypto 1.2{Environment.NewLine}Copyright © 2018 - 2020 by CodeGator.{Environment.NewLine}All rights reserved.",
+                $"QuickCrypto - [{typeof(MainWindowViewModel).Assembly.ReadFileVersion()}]" +
+                $"{Environment.NewLine}Copyright © 2018 - {DateTime.Today.Year} by CodeGator.",
                 "About",
                 MessageBoxButton.OK
                 );

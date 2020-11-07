@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace QuickCrypto.Infrastructure
+namespace CG.Tools.QuickCrypto.Infrastructure
 {
     /// <summary>
     /// This class converts a byte array to a string.
@@ -38,7 +38,7 @@ namespace QuickCrypto.Infrastructure
             StringBuilder sb = new StringBuilder(100);
             for (int x = 0; x < bytes.Length; x++)
             {
-                sb.Append(bytes[x].ToString()).Append(" ");
+                sb.Append(bytes[x].ToString("X2")).Append(" ");
             }
             return sb.ToString();
         }

@@ -3,8 +3,9 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows;
 
-namespace QuickCrypto.ViewModels
+namespace CG.Tools.QuickCrypto.ViewModels
 {
     /// <summary>
     /// This class represents a view-model for the rijndael tab.
@@ -127,77 +128,88 @@ namespace QuickCrypto.ViewModels
         /// <param name="args">The arguments for the operation.</param>
         void ExecuteEncryptCommand(object args)
         {
-            var encryptedBytes = new byte[0];
-
-            // Get the password bytes.
-            var passwordBytes = Encoding.UTF8.GetBytes(
-                Password
-                );
-
-            // Get the salt bytes.
-            var saltBytes = Encoding.UTF8.GetBytes(
-                Salt
-                );
-
-            // Create the algorithm
-            using (var alg = new RijndaelManaged())
+            try
             {
-                // Set the block and key sizes.
-                alg.KeySize = 256;
-                alg.BlockSize = 128;
+                var encryptedBytes = new byte[0];
 
-                // Derive the ACTUAL crypto key.
-                var key = new Rfc2898DeriveBytes(
-                    passwordBytes, 
-                    saltBytes, 
-                    10000
+                // Get the password bytes.
+                var passwordBytes = Encoding.UTF8.GetBytes(
+                    Password
                     );
 
-                // Generate the key and salt with proper lengths.
-                alg.Key = key.GetBytes(alg.KeySize / 8);
-                alg.IV = key.GetBytes(alg.BlockSize / 8);
+                // Get the salt bytes.
+                var saltBytes = Encoding.UTF8.GetBytes(
+                    Salt
+                    );
 
-                // Create the encryptor.
-                using (var enc = alg.CreateEncryptor(
-                    alg.Key, 
-                    alg.IV
-                    ))
+                // Create the algorithm
+                using (var alg = new RijndaelManaged())
                 {
-                    // Create a temporary stream.
-                    using (var stream = new MemoryStream())
+                    // Set the block and key sizes.
+                    alg.KeySize = 256;
+                    alg.BlockSize = 128;
+
+                    // Derive the ACTUAL crypto key.
+                    var key = new Rfc2898DeriveBytes(
+                        passwordBytes,
+                        saltBytes,
+                        10000
+                        );
+
+                    // Generate the key and salt with proper lengths.
+                    alg.Key = key.GetBytes(alg.KeySize / 8);
+                    alg.IV = key.GetBytes(alg.BlockSize / 8);
+
+                    // Create the encryptor.
+                    using (var enc = alg.CreateEncryptor(
+                        alg.Key,
+                        alg.IV
+                        ))
                     {
-                        // Create a cryptographic stream.
-                        using (var cryptoStream = new CryptoStream(
-                            stream, 
-                            enc, 
-                            CryptoStreamMode.Write
-                            ))
+                        // Create a temporary stream.
+                        using (var stream = new MemoryStream())
                         {
-                            // Create a writer
-                            using (var writer = new StreamWriter(
-                                cryptoStream
+                            // Create a cryptographic stream.
+                            using (var cryptoStream = new CryptoStream(
+                                stream,
+                                enc,
+                                CryptoStreamMode.Write
                                 ))
                             {
-                                // Write the bytes.
-                                writer.Write(
-                                    PlainText
-                                    );
-                            }
+                                // Create a writer
+                                using (var writer = new StreamWriter(
+                                    cryptoStream
+                                    ))
+                                {
+                                    // Write the bytes.
+                                    writer.Write(
+                                        PlainText
+                                        );
+                                }
 
-                            // Get the bytes.
-                            encryptedBytes = stream.ToArray();
+                                // Get the bytes.
+                                encryptedBytes = stream.ToArray();
+                            }
                         }
                     }
                 }
+
+                // Convert the bytes back to an encoded string.
+                var encryptedValue = Convert.ToBase64String(
+                    encryptedBytes
+                    );
+
+                // Update the UI.
+                EncryptedText = encryptedValue;
             }
+            catch (Exception ex)
+            {
+                // Clear whatever is in the UI.
+                EncryptedText = "";
 
-            // Convert the bytes back to an encoded string.
-            var encryptedValue = Convert.ToBase64String(
-                encryptedBytes
-                );
-
-            // Update the UI.
-            EncryptedText = encryptedValue;
+                // Show the user what happened.
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // *******************************************************************
@@ -221,72 +233,83 @@ namespace QuickCrypto.ViewModels
         /// <param name="args">The arguments for the operation.</param>
         void ExecuteDecryptCommand(object args)
         {
-            // Convert the encrypted value to bytes.
-            var encryptedBytes = Convert.FromBase64String(
-                EncryptedText
-                );
-
-            // Get the password bytes.
-            var passwordBytes = Encoding.UTF8.GetBytes(
-                Password
-                );
-
-            // Get the salt bytes.
-            var saltBytes = Encoding.UTF8.GetBytes(
-                Salt
-                );
-
-            var plainValue = "";
-
-            // Create the algorithm
-            using (var alg = new RijndaelManaged())
+            try
             {
-                // Set the block and key sizes.
-                alg.KeySize = 256;
-                alg.BlockSize = 128;
-
-                // Derive the ACTUAL crypto key.
-                var key = new Rfc2898DeriveBytes(
-                    passwordBytes,
-                    saltBytes,
-                    10000
+                // Convert the encrypted value to bytes.
+                var encryptedBytes = Convert.FromBase64String(
+                    EncryptedText
                     );
 
-                // Generate the key and salt with proper lengths.
-                alg.Key = key.GetBytes(alg.KeySize / 8);
-                alg.IV = key.GetBytes(alg.BlockSize / 8);
+                // Get the password bytes.
+                var passwordBytes = Encoding.UTF8.GetBytes(
+                    Password
+                    );
 
-                // Create the decryptor.
-                using (var dec = alg.CreateDecryptor(
-                    alg.Key, 
-                    alg.IV
-                    ))
+                // Get the salt bytes.
+                var saltBytes = Encoding.UTF8.GetBytes(
+                    Salt
+                    );
+
+                var plainValue = "";
+
+                // Create the algorithm
+                using (var alg = new RijndaelManaged())
                 {
-                    // Create a temporary stream.
-                    using (var stream = new MemoryStream(
-                        encryptedBytes
+                    // Set the block and key sizes.
+                    alg.KeySize = 256;
+                    alg.BlockSize = 128;
+
+                    // Derive the ACTUAL crypto key.
+                    var key = new Rfc2898DeriveBytes(
+                        passwordBytes,
+                        saltBytes,
+                        10000
+                        );
+
+                    // Generate the key and salt with proper lengths.
+                    alg.Key = key.GetBytes(alg.KeySize / 8);
+                    alg.IV = key.GetBytes(alg.BlockSize / 8);
+
+                    // Create the decryptor.
+                    using (var dec = alg.CreateDecryptor(
+                        alg.Key,
+                        alg.IV
                         ))
                     {
-                        // Create a crypto stream.
-                        using (var cryptoStream = new CryptoStream(
-                            stream, 
-                            dec, 
-                            CryptoStreamMode.Read
+                        // Create a temporary stream.
+                        using (var stream = new MemoryStream(
+                            encryptedBytes
                             ))
                         {
-                            using (var reader = new StreamReader(
-                                cryptoStream
+                            // Create a crypto stream.
+                            using (var cryptoStream = new CryptoStream(
+                                stream,
+                                dec,
+                                CryptoStreamMode.Read
                                 ))
                             {
-                                plainValue = reader.ReadToEnd();
+                                using (var reader = new StreamReader(
+                                    cryptoStream
+                                    ))
+                                {
+                                    plainValue = reader.ReadToEnd();
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            // Update the UI.
-            PlainText = plainValue;
+                // Update the UI.
+                PlainText = plainValue;
+            }
+            catch (Exception ex)
+            {
+                // Clear whatever is in the UI.
+                PlainText = "";
+
+                // Show the user what happened.
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // *******************************************************************

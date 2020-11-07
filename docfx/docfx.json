@@ -5,7 +5,7 @@
         {
 		  "src" : "..",
           "files": [
-            "src/CG.Tools.QuickCrypto/**.csproj"
+            "src/**.csproj"
           ]
         }
       ],

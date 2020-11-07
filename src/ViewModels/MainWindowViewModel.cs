@@ -1,6 +1,7 @@
 ﻿using System;
+using CG.Reflection;
 
-namespace QuickCrypto.ViewModels
+namespace CG.Tools.QuickCrypto.ViewModels
 {
     /// <summary>
     /// This class represents a view-model for the main window.
@@ -23,6 +24,11 @@ namespace QuickCrypto.ViewModels
         /// </summary>
         public RijndaelViewModel Rijndael { get; }
 
+        /// <summary>
+        /// This property contains the application caption.
+        /// </summary>
+        public string Caption { get; set; }
+
         #endregion
 
         // *******************************************************************
@@ -40,6 +46,7 @@ namespace QuickCrypto.ViewModels
             // Create the default view-models.
             DataPrivacy = new DataPrivacyViewModel();
             Rijndael = new RijndaelViewModel();
+            Caption = $"QuickCrypto - [{typeof(MainWindowViewModel).Assembly.ReadFileVersion()}]";
         }
 
         #endregion

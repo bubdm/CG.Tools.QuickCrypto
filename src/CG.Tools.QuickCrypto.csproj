@@ -26,17 +26,21 @@
   <ItemGroup>
     <None Remove="Images\About.png" />
     <None Remove="Images\App.ico" />
+    <None Remove="Images\bulb.png" />
+    <None Remove="Images\Directory-03.png" />
     <None Remove="Images\Down Arrow - 02.png" />
     <None Remove="Images\Exit.png" />
     <None Remove="Images\Gear.ico" />
     <None Remove="Images\Gear.png" />
     <None Remove="Images\Logo.png" />
+    <None Remove="Images\Reset.png" />
     <None Remove="Images\Splash.png" />
     <None Remove="Images\Up Arrow - 02.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Validations" Version="2020.1.39" />
+    <PackageReference Include="CG.Core" Version="2020.6.35" />
+    <PackageReference Include="CG.Validations" Version="2020.1.42" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.9" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
@@ -44,16 +48,18 @@
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="4.7.0" />
-      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.Shared.WPF" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.Tools.WPF" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.SfInput.WPF" Version="18.3.0.42" />
-    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="18.3.0.42" />
+      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.SfInput.WPF" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="18.3.0.44" />
 </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\About.png" />
+    <Resource Include="Images\bulb.png" />
+    <Resource Include="Images\Directory-03.png" />
     <Resource Include="Images\Down Arrow - 02.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -63,6 +69,7 @@
     <Resource Include="Images\Logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Reset.png" />
     <Resource Include="Images\Splash.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

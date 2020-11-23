@@ -17,6 +17,7 @@
     <Version>1.2.0</Version>
     <UserSecretsId>5bf2914d-d5c6-4cc3-bebd-02a79252fb0f</UserSecretsId>
     <ApplicationIcon>Images\Gear.ico</ApplicationIcon>
+    <PackageIcon>packageDefaultIcon-50x50.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -36,24 +37,28 @@
     <None Remove="Images\Reset.png" />
     <None Remove="Images\Splash.png" />
     <None Remove="Images\Up Arrow - 02.png" />
+    <None Include="..\packageDefaultIcon-50x50.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Core" Version="2020.6.35" />
-    <PackageReference Include="CG.Validations" Version="2020.1.42" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.9" />
+    <PackageReference Include="CG.Core" Version="2020.6.41" />
+    <PackageReference Include="CG.Validations" Version="2020.1.48" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="4.7.0" />
-      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="18.3.0.44" />
-    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="18.3.0.44" />
-    <PackageReference Include="Syncfusion.Shared.WPF" Version="18.3.0.44" />
-    <PackageReference Include="Syncfusion.Tools.WPF" Version="18.3.0.44" />
-    <PackageReference Include="Syncfusion.SfInput.WPF" Version="18.3.0.44" />
-    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="18.3.0.44" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.SfInput.WPF" Version="18.3.0.50" />
+    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="18.3.0.50" />
 </ItemGroup>
 
   <ItemGroup>

@@ -19,6 +19,10 @@ namespace CG.Tools.QuickCrypto.Views
     /// </summary>
     public partial class EntropyWindow : Window, ICloseWindow
     {
+        /// <summary>
+        /// This constrctor creates a new instance of the <see cref="EntropyWindow"/>
+        /// class.
+        /// </summary>
         public EntropyWindow()
         {
             InitializeComponent();

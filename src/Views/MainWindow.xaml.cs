@@ -46,6 +46,7 @@ namespace CG.Tools.QuickCrypto.Views
                 OnVisualStyleChanged();
             }
         }
+
         #endregion
 
         // *******************************************************************

@@ -1,6 +1,11 @@
 # CG.Tools.QuickCrypt change log
 ---
 
+## 1.3
+
+* I moved the project to .NET 5.0
+* I added support for ASP.NET Core data protection.
+
 ## 1.2
 
 * I moved the project to .NET Core 3.1.

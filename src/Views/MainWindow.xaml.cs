@@ -134,6 +134,46 @@ namespace CG.Tools.QuickCrypto.Views
         // *******************************************************************
 
         /// <summary>
+        /// This method is called when the <see cref="dataProtectionPlainText"/>
+        /// control has a text change.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The arguments for the event.</param>
+        private void dataProtectionPlainText_TextChanged(
+            object sender,
+            TextChangedEventArgs e
+            )
+        {
+            if (null != dataProtectionEncrypt &&
+                null != dataProtectionPlainText)
+            {
+                dataProtectionEncrypt.IsEnabled = dataProtectionPlainText.Text.Length > 0;
+            }
+        }
+
+        // *******************************************************************
+
+        /// <summary>
+        /// This method is called when the <see cref="dataProtectionEncryptedText"/>
+        /// control has a text change.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The arguments for the event.</param>
+        private void dataProtectionEncryptedText_TextChanged(
+            object sender,
+            TextChangedEventArgs e
+            )
+        {
+            if (null != dataProtectionDecrypt &&
+                null != dataProtectionEncryptedText)
+            {
+                dataProtectionDecrypt.IsEnabled = dataProtectionEncryptedText.Text.Length > 0;
+            }
+        }
+
+        // *******************************************************************
+
+        /// <summary>
         /// This method is called when the <see cref="rijndaelPlainText"/>
         /// control has a text change.
         /// </summary>

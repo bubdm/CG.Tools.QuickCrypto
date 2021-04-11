@@ -54,6 +54,85 @@
                                   ShowTabItemContextMenu="False"
                                   TabStripPlacement="Bottom">
 
+            <syncfusion:TabItemExt x:Name="dataProtectionTab"
+                                   Header="Data Protection">
+
+                <Grid Margin="0, 0, 0, 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" 
+                            BorderBrush="Gray" 
+                            BorderThickness="0, 0, 0, 2"
+                            Margin="0, 0, 0, 2">
+                        <TextBlock  x:Name="dataProtectionInstructions" 
+                                    TextWrapping="WrapWithOverflow"
+                                    TextAlignment="Justify"
+                                    Height="60"
+                                    Padding="5, 2, 2, 10"
+                                    Margin="5">
+                            Data Protection is portable, so it's a great choice for server based solutions, or values that need to be shared across machines.
+                        </TextBlock>
+                    </Border>
+
+                    <syncfusion:SfTextBoxExt x:Name="dataProtectionPlainText" 
+                                             Grid.Row="2"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding DataProtection.PlainText, Mode=TwoWay}"
+                                             TextChanged="dataProtectionPlainText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put plain text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>
+                    </syncfusion:SfTextBoxExt>
+
+                    <StackPanel Grid.Row="3" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <syncfusion:ButtonAdv x:Name="dataProtectionEncrypt" 
+                                              SmallIcon="/Images/Down Arrow - 02.png"
+                                              Label="Encrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              Margin="0, 0, 5, 0"
+                                              ToolTip="Click to encrypt the text."
+                                              Command="{Binding DataProtection.EncryptCommand}"/>
+                        <syncfusion:ButtonAdv x:Name="dataProtectionDecrypt" 
+                                              SmallIcon="/Images/Up Arrow - 02.png"
+                                              Label="Decrypt"
+                                              Width="80"
+                                              IsEnabled="False"
+                                              ToolTip="Click to decrypt the text."
+                                              Command="{Binding DataProtection.DecryptCommand}"/>
+                    </StackPanel>
+
+                    <syncfusion:SfTextBoxExt x:Name="dataProtectionEncryptedText" 
+                                             Grid.Row="4"
+                                             Watermark="Put encrypted text here" 
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             Text="{Binding DataProtection.EncryptedText, Mode=TwoWay}"
+                                             TextChanged="dataProtectionEncryptedText_TextChanged"
+                                             VerticalScrollBarVisibility="Auto">
+                        <syncfusion:SfTextBoxExt.WatermarkTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Put encrypted text here" Foreground="Blue"/>
+                            </DataTemplate>
+                        </syncfusion:SfTextBoxExt.WatermarkTemplate>
+                    </syncfusion:SfTextBoxExt>
+
+                </Grid>
+                
+            </syncfusion:TabItemExt>
+            
             <syncfusion:TabItemExt x:Name="dataPrivacyTab"
                                    Header="DPAPI">
 
@@ -76,7 +155,7 @@
                                     Height="60"
                                     Padding="5, 2, 2, 10"
                                     Margin="5">
-                            DPAPI doesn't require a password, which makes it great for use in configuration files.
+                            DPAPI is a Windows only library that doesn't require a password, which makes it great for use in configuration files.
                         </TextBlock>
                     </Border>
 

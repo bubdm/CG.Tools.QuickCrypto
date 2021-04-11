@@ -15,6 +15,11 @@ namespace CG.Tools.QuickCrypto.ViewModels
         #region Properties
 
         /// <summary>
+        /// This property contains a view-model for the data protection tab.
+        /// </summary>
+        public DataProtectionViewModel DataProtection { get; }
+
+        /// <summary>
         /// This property contains a view-model for the data privacy tab.
         /// </summary>
         public DataPrivacyViewModel DataPrivacy { get; }
@@ -44,6 +49,7 @@ namespace CG.Tools.QuickCrypto.ViewModels
         public MainWindowViewModel()
         {
             // Create the default view-models.
+            DataProtection = new DataProtectionViewModel();
             DataPrivacy = new DataPrivacyViewModel();
             Rijndael = new RijndaelViewModel();
             Caption = $"QuickCrypto - [{typeof(MainWindowViewModel).Assembly.ReadFileVersion()}]";

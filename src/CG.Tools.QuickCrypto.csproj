@@ -44,21 +44,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CG.Core" Version="2021.3.1" />
+    <PackageReference Include="CG.Core" Version="2021.3.2" />
     <PackageReference Include="CG.DataProtection" Version="2021.2.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.220">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
-      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="19.2.0.47" />
-    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="19.2.0.47" />
-    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.2.0.47" />
-    <PackageReference Include="Syncfusion.Tools.WPF" Version="19.2.0.47" />
-    <PackageReference Include="Syncfusion.SfInput.WPF" Version="19.2.0.47" />
-    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="19.2.0.47" />
+      <PackageReference Include="Syncfusion.SfBusyIndicator.WPF" Version="19.2.0.55" />
+    <PackageReference Include="Syncfusion.SfSkinManager.Wpf" Version="19.2.0.55" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.2.0.55" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="19.2.0.55" />
+    <PackageReference Include="Syncfusion.SfInput.WPF" Version="19.2.0.55" />
+    <PackageReference Include="Syncfusion.Themes.VisualStudio2015.Wpf" Version="19.2.0.55" />
 </ItemGroup>
 
   <ItemGroup>

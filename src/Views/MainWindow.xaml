@@ -76,7 +76,7 @@
                                     Height="60"
                                     Padding="5, 2, 2, 10"
                                     Margin="5">
-                            Data Protection is portable, so it's a great choice for server based solutions, or values that need to be shared across machines.
+                            Data Protection is a fast, secure, part of ASP.NET and it requires no password. Keys are not shareable across servers.
                         </TextBlock>
                     </Border>
 
@@ -155,7 +155,7 @@
                                     Height="60"
                                     Padding="5, 2, 2, 10"
                                     Margin="5">
-                            DPAPI is a Windows only library that doesn't require a password, which makes it great for use in configuration files.
+                            DPAPI is a legacy Windows library that doesn't require a password. Keys are not shareable across machines.
                         </TextBlock>
                     </Border>
 
